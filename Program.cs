@@ -7,6 +7,7 @@ int platosPreparados = 0;
 string rutaSaludables = "recetasSaludables.txt";
 string rutaAprendizaje = "recetasAprendizaje.txt";
 
+
 /* 
     DANNIA:                                STEPHANIE
 Main()                              BuscarPorIngrediente()
