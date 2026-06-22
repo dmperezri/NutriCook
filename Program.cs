@@ -94,6 +94,44 @@ void MostrarMenuSaludable()
         }
     } while (op != 7);
 }
+
+void MostrarMenuAprendizaje()
+{
+    int op = 0;
+    do
+    {
+        Console.Clear();
+        Banner("PERFIL DE APRENDIZAJE");
+        Console.WriteLine("  1. Registrar receta paso a paso (Didáctica)");
+        Console.WriteLine("  2. Mostrar catálogo de recetas para principiantes");
+        Console.WriteLine("  3. Buscar recetas por ingredientes disponibles");
+        Console.WriteLine("  4. Filtrar platos fáciles por tiempo máximo");
+        Console.WriteLine("  5. Consejos útiles y técnicas de cocina básicas");
+        Console.WriteLine("  6. Guardar Cambios");
+        Console.WriteLine("  7. Cerrar Sesión\n");
+        Console.Write("  Seleccione una opción: ");
+
+        if (!int.TryParse(Console.ReadLine(), out op)) op = 0;
+
+        Console.Clear();
+        switch (op)
+        {
+            case 1: AgregarReceta("Aprendizaje"); break;
+            case 2: MostrarRecetas(); break;
+            case 3: BuscarPorIngrediente(); break;
+            case 4: FiltrarPorTiempo(); break;
+            case 5: ModuloDidactico(); break;
+            case 6: GuardarDatos(); break;
+            case 7:
+                Console.WriteLine("\n  Cerrando sesión del Perfil de Aprendizaje...");
+                System.Threading.Thread.Sleep(1000);
+                break;
+            default: MostrarError("Opción no válida."); break;
+        }
+    } while (op != 7);
+}
+
+
 public struct Receta
 {
     public string nombre;
