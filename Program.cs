@@ -50,6 +50,37 @@ void BuscarPorIngrediente()
     Pausar();
 }
 
+void FiltrarPorTiempo()
+{
+    Banner("FILTRO DE COCINA RÁPIDA");
+    Console.Write("  Ingresa el tiempo máximo del que dispones (minutos): ");
+
+    if (!int.TryParse(Console.ReadLine(), out int maxT) || maxT <= 0)
+    {
+        MostrarError("Valor no válido.");
+        return;
+    }
+
+    bool encontrado = false;
+    Console.WriteLine($"\n  Platos que puedes preparar en {maxT} minutos o menos:\n");
+
+    for (int i = 0; i < cantidad; i++)
+    {
+        if (recetas[i].categoria == perfilActual && !string.IsNullOrEmpty(recetas[i].nombre) &&
+            recetas[i].tiempoPreparacion <= maxT)
+        {
+            Console.WriteLine("  - " + recetas[i].nombre + ": " + recetas[i].tiempoPreparacion + " min");
+            encontrado = true;
+        }
+    }
+
+    if (!encontrado)
+    {
+        Console.WriteLine("  No hay recetas dentro de ese límite de tiempo.");
+    }
+    Pausar();
+}
+
 
 
 public struct Receta
