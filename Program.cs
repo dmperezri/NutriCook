@@ -22,6 +22,20 @@ Pausar()                            CargarDatos()
  AgregarReceta()                    ModuloSeguimiento()
                                     MostrarRecetas()*/
 
+void Main()
+{
+    CargarDatos();
+    if (cantidad == 0)
+    {
+        CargarEjemplos();
+    }
+
+    Cargando();
+    PantallaLogin();
+}
+
+Main();
+
 public struct Receta
 {
     public string nombre;
