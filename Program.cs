@@ -57,6 +57,43 @@ void PantallaLogin()
         }
     }
 }
+
+void MostrarMenuSaludable()
+{
+    int op = 0;
+    do
+    {
+        Console.Clear();
+        Banner("PERFIL SALUDABLE");
+        Console.WriteLine("  1. Registrar nueva receta fit / saludable");
+        Console.WriteLine("  2. Ver recetas saludables disponibles");
+        Console.WriteLine("  3. Buscar recetas por ingrediente clave");
+        Console.WriteLine("  4. Filtrar por tiempo (Cocina Saludable Rápida)");
+        Console.WriteLine("  5. Control y Seguimiento de platos preparados");
+        Console.WriteLine("  6. Guardar Cambios");
+        Console.WriteLine("  7. Cerrar Sesión\n");
+        Console.Write("  Seleccione una opción: ");
+
+        if (!int.TryParse(Console.ReadLine(), out op)) op = 0;
+        Console.Clear();
+        switch (op)
+        {
+            case 1: AgregarReceta("Saludable"); break;
+            case 2: MostrarRecetas(); break;
+            case 3: BuscarPorIngrediente(); break;
+            case 4: FiltrarPorTiempo(); break;
+            case 5: ModuloSeguimiento(); break;
+            case 6: GuardarDatos(); break;
+            case 7:
+                Console.WriteLine("\n  Cerrando sesión del Perfil Saludable...");
+                System.Threading.Thread.Sleep(1000);
+                break;
+            default:
+                MostrarError("Opción no válida.");
+                break;
+        }
+    } while (op != 7);
+}
 public struct Receta
 {
     public string nombre;
