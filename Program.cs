@@ -1,22 +1,24 @@
-﻿void Banner(string titulo)
+﻿void GuardarDatos()
 {
-    Console.ForegroundColor = ConsoleColor.Cyan;
-    Console.WriteLine(new string('=', titulo.Length + 4));
-    Console.WriteLine($"  {titulo}");
-    Console.WriteLine(new string('=', titulo.Length + 4) + "\n");
-    Console.ResetColor();
-}
+    try
+    {
+        using (StreamWriter swSaludable = new StreamWriter(rutaSaludables, false))
+        using (StreamWriter swAprendizaje = new StreamWriter(rutaAprendizaje, false))
+        {
+            for (int i = 0; i < cantidad; i++)
+            {
+                if (string.IsNullOrEmpty(recetas[i].nombre)) continue;
 
-void MostrarError(string msj)
-{
-    Console.ForegroundColor = ConsoleColor.Red;
-    Console.WriteLine($"\n  [ERROR]: {msj}");
-    Console.ResetColor();
-    Pausar();
-}
+                string linea = recetas[i].nombre + ";" + recetas[i].ingredientes + ";" + recetas[i].pasos + ";" + recetas[i].tiempoPreparacion;
 
-void Pausar()
-{
-    Console.WriteLine("\n  Presiona una tecla para continuar...");
-    Console.ReadKey();
-}
+                if (recetas[i].categoria == "Saludable")
+                    swSaludable.WriteLine(linea);
+                else if (recetas[i].categoria == "Aprendizaje")
+                    swAprendizaje.WriteLine(linea);
+            }
+        }
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("\n  ¡Registros guardados satisfactoriamente en archivos .txt!");
+        Console.ResetColor();
+    }
+ 
