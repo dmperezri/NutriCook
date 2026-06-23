@@ -1,32 +1,22 @@
-﻿Receta[] recetas = new Receta[50];
-
-int cantidad = 0;
-string perfilActual = "";
-int platosPreparados = 0;
-
-string rutaSaludables = "recetasSaludables.txt";
-string rutaAprendizaje = "recetasAprendizaje.txt";
-
-
-/*  *
-    DANNIA:                                STEPHANIE
-Main()                              BuscarPorIngrediente()
-PantallaLogin()                     FiltrarPorTiempo()
-MostrarMenuSaludable()
-MostrarMenuAprendizaje()                    LUIS
-Banner()
-MostrarError()                      GuardarDatos()
-Pausar()                            CargarDatos()
-                                    LeerArchivo()CargarEjemplos()
- PATRICIA                           Cargando()                          
- AgregarReceta()                    ModuloSeguimiento()
-                                    MostrarRecetas()*/
-
-public struct Receta
+﻿void Banner(string titulo)
 {
-    public string nombre;
-    public string ingredientes;
-    public string pasos;
-    public int tiempoPreparacion;
-    public string categoria;
+    Console.ForegroundColor = ConsoleColor.Cyan;
+    Console.WriteLine(new string('=', titulo.Length + 4));
+    Console.WriteLine($"  {titulo}");
+    Console.WriteLine(new string('=', titulo.Length + 4) + "\n");
+    Console.ResetColor();
+}
+
+void MostrarError(string msj)
+{
+    Console.ForegroundColor = ConsoleColor.Red;
+    Console.WriteLine($"\n  [ERROR]: {msj}");
+    Console.ResetColor();
+    Pausar();
+}
+
+void Pausar()
+{
+    Console.WriteLine("\n  Presiona una tecla para continuar...");
+    Console.ReadKey();
 }
