@@ -21,4 +21,9 @@
         Console.WriteLine("\n  ¡Registros guardados satisfactoriamente en archivos .txt!");
         Console.ResetColor();
     }
- 
+    catch (Exception ex)
+    {
+        MostrarError("Hubo un problema al guardar: " + ex.Message);
+    }
+    Pausar();
+}
