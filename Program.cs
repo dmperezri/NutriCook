@@ -221,6 +221,33 @@ void MostrarRecetas()
     Pausar();
 }
 
+void BuscarPorIngrediente()
+{
+    Banner("BÚSQUEDA POR INGREDIENTES");
+    Console.Write("  Ingresa el ingrediente que deseas buscar: ");
+    string ing = Console.ReadLine()!.ToLower();
+
+    bool encontrado = false;
+    Console.WriteLine("\n  Resultados encontrados:\n");
+
+    for (int i = 0; i < cantidad; i++)
+    {
+        if (recetas[i].categoria == perfilActual && !string.IsNullOrEmpty(recetas[i].nombre) &&
+            recetas[i].ingredientes.ToLower().Contains(ing))
+        {
+            Console.WriteLine("  - " + recetas[i].nombre + " (" + recetas[i].tiempoPreparacion + " min)");
+            Console.WriteLine("    Ingredientes: " + recetas[i].ingredientes + "\n");
+            encontrado = true;
+        }
+    }
+
+    if (!encontrado)
+    {
+        Console.WriteLine("  No se encontraron recetas con ese ingrediente en tu catálogo actual.");
+    }
+    Pausar();
+}
+
 
 public struct Receta
 {
