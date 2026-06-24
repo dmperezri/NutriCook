@@ -279,6 +279,37 @@ void FiltrarPorTiempo()
     Pausar();
 }
 
+void ModuloSeguimiento()
+{
+    Banner("CONTROL Y SEGUIMIENTO NUTRICIONAL");
+    Console.WriteLine("  Llevas un total de " + platosPreparados + " platos saludables preparados.\n");
+    Console.WriteLine("  1. Registrar un nuevo plato consumido hoy");
+    Console.WriteLine("  2. Volver al menú");
+    Console.Write("\n  Elige una opción: ");
+
+    string op = Console.ReadLine()!;
+    if (op == "1")
+    {
+        platosPreparados++;
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("\n  ¡Excelente! Sumando otro plato a tus hábitos saludables.");
+        Console.WriteLine("  Total actualizado: " + platosPreparados);
+        Console.ResetColor();
+    }
+    Pausar();
+}
+
+void ModuloDidactico()
+{
+    Banner("TIPS DIDÁCTICOS Y TÉCNICAS BÁSICAS");
+    Console.WriteLine("  Aquí tienes algunos consejos para mejorar como cocinero:\n");
+    Console.WriteLine("  * Picar cebolla sin llorar: Enfría la cebolla en la nevera unos 15 min antes.");
+    Console.WriteLine("  * Sal antes de tiempo: Si te pasas de sal en caldos, añade media papa cruda para absorber el exceso.");
+    Console.WriteLine("  * Pasta perfecta: No le pongas aceite al agua porque la salsa resbalará; ponle sal cuando hierva.");
+    Console.WriteLine("  * Ajo pelado fácil: Aplasta ligeramente los dientes con la hoja plana del cuchillo; la cáscara saldrá sola.");
+    Pausar();
+}
+
 public struct Receta
 {
     public string nombre;
