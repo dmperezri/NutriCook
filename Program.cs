@@ -351,6 +351,31 @@ void CargarDatos()
     catch (Exception) { }
 }
 
+void LeerArchivo(string ruta, string cat)
+{
+    if (File.Exists(ruta))
+    {
+        using (StreamReader sr = new StreamReader(ruta))
+        {
+            string linea;
+            while ((linea = sr.ReadLine()!) != null && cantidad < recetas.Length)
+            {
+                string[] datos = linea.Split(';');
+                if (datos.Length >= 4)
+                {
+                    recetas[cantidad].nombre = datos[0];
+                    recetas[cantidad].ingredientes = datos[1];
+                    recetas[cantidad].pasos = datos[2];
+                    int.TryParse(datos[3], out recetas[cantidad].tiempoPreparacion);
+                    recetas[cantidad].categoria = cat;
+                    cantidad++;
+                }
+            }
+        }
+    }
+}
+
+
 public struct Receta
 {
     public string nombre;
