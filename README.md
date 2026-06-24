@@ -23,7 +23,7 @@ Especializado en personas que están dando sus primeros pasos en el arte culinar
 
 ## Tecnologías Utilizadas
 
-* **Lenguaje:** C# (.NET Core / .NET 6.0 o superior)
+* **Lenguaje:** C# (.NET Core / .NET 10.0 o superior)
 * **Paradigma:** Estructurado mediante modularización funcional (`void`) y registros con estructuras de datos (`struct`).
 * **Persistencia:** Archivos planos de texto (`.txt`) mediante flujos de entrada/salida (`StreamWriter`/`StreamReader`).
 
