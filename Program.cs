@@ -7,20 +7,20 @@ int platosPreparados = 0;
 string rutaSaludables = "recetasSaludables.txt";
 string rutaAprendizaje = "recetasAprendizaje.txt";
 
+void Main()
+{
+    CargarDatos();
+    if (cantidad == 0)
+    {
+        CargarEjemplos();
+    }
 
-/*  *
-    DANNIA:                                STEPHANIE
-Main()                              BuscarPorIngrediente()
-PantallaLogin()                     FiltrarPorTiempo()
-MostrarMenuSaludable()
-MostrarMenuAprendizaje()                    LUIS
-Banner()
-MostrarError()                      GuardarDatos()
-Pausar()                            CargarDatos()
-                                    LeerArchivo()CargarEjemplos()
- PATRICIA                           Cargando()                          
- AgregarReceta()                    ModuloSeguimiento()
-                                    MostrarRecetas()*/
+    Cargando();
+    PantallaLogin();
+}
+
+Main();
+
 
 public struct Receta
 {
