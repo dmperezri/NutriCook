@@ -131,6 +131,97 @@ void MostrarMenuAprendizaje()
     } while (op != 7);
 }
 
+void AgregarReceta(string tipoPerfil)
+{
+    Banner(tipoPerfil == "Saludable" ? "NUEVA RECETA FIT" : "NUEVA RECETA PASO A PASO");
+
+    if (cantidad >= 50)
+    {
+        MostrarError("Se ha alcanzado el límite máximo de recetas (" + 50 + ").");
+        return;
+    }
+
+    Console.Write("  Nombre de la receta: ");
+    string nombre = Console.ReadLine()!;
+    if (string.IsNullOrEmpty(nombre))
+    {
+        MostrarError("El nombre no puede estar vacío.");
+        return;
+    }
+
+    Console.Write(tipoPerfil == "Saludable" ? "  Ingredientes (Separados por coma): "
+                                            : "  Ingredientes (Qué necesitas comprar, separados por coma): ");
+    string ingredientes = Console.ReadLine()!;
+
+    Console.Write(tipoPerfil == "Saludable" ? "  Pasos de preparación (Separados por ';'): "
+                                            : "  Pasos MUY DETALLADOS (Separados por ';'): ");
+    string pasos = Console.ReadLine()!;
+
+    Console.Write("  Tiempo estimado de preparación (en minutos): ");
+    if (!int.TryParse(Console.ReadLine(), out int tiempo) || tiempo <= 0)
+    {
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("  Valor inválido detectado. Se asignará 1 minuto por defecto.");
+        Console.ResetColor();
+        tiempo = 1;
+    }
+
+    recetas[cantidad].nombre = nombre;
+    recetas[cantidad].ingredientes = ingredientes;
+    recetas[cantidad].pasos = pasos;
+    recetas[cantidad].tiempoPreparacion = tiempo;
+    recetas[cantidad].categoria = tipoPerfil;
+
+    cantidad++;
+
+    Console.ForegroundColor = ConsoleColor.Green;
+    Console.WriteLine("\n  ¡Receta agregada localmente con éxito!");
+    Console.ResetColor();
+    Pausar();
+}
+
+void MostrarRecetas()
+{
+    Banner("CATÁLOGO: " + perfilActual.ToUpper());
+
+    bool hayRecetas = false;
+    int contadorVisual = 1;
+
+    for (int i = 0; i < cantidad; i++)
+    {
+        if (recetas[i].categoria == perfilActual && !string.IsNullOrEmpty(recetas[i].nombre))
+        {
+            hayRecetas = true;
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("  +-- #" + contadorVisual + " " + recetas[i].nombre +
+                " [" + recetas[i].categoria + "] - " + recetas[i].tiempoPreparacion + " min");
+            Console.ResetColor();
+            Console.WriteLine("  |  Ingredientes : " + recetas[i].ingredientes);
+            Console.WriteLine("  |  Pasos        :");
+
+            string[] pasosArray = recetas[i].pasos.Split(';');
+            for (int j = 0; j < pasosArray.Length; j++)
+            {
+                if (!string.IsNullOrWhiteSpace(pasosArray[j]))
+                    Console.WriteLine("  |    " + (j + 1) + ". " + pasosArray[j].Trim());
+            }
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("  +-------------------------------------------------\n");
+            Console.ResetColor();
+            contadorVisual++;
+        }
+    }
+
+    if (!hayRecetas)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("  Aún no hay recetas registradas en este perfil. ¡Agrega una!");
+        Console.ResetColor();
+    }
+    Pausar();
+}
+
+
 public struct Receta
 {
     public string nombre;
