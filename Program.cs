@@ -375,6 +375,24 @@ void LeerArchivo(string ruta, string cat)
     }
 }
 
+void CargarEjemplos()
+{
+    // ====== SALUDABLE ======
+    recetas[0].nombre = "Ensalada Mediterranea";
+    recetas[0].ingredientes = "Lechuga, tomate, pepino, aceitunas, queso feta";
+    recetas[0].pasos = "Lavar y cortar vegetales; Mezclar y agregar aceite de oliva";
+    recetas[0].tiempoPreparacion = 10;
+    recetas[0].categoria = "Saludable";
+
+    // ====== APRENDIZAJE ======
+    recetas[1].nombre = "Huevos Revueltos";
+    recetas[1].ingredientes = "2 huevos, sal, mantequilla, pimienta";
+    recetas[1].pasos = "Batir huevos; Calentar mantequilla; Cocinar a fuego bajo";
+    recetas[1].tiempoPreparacion = 5;
+    recetas[1].categoria = "Aprendizaje";
+
+    cantidad = 2;
+}
 
 public struct Receta
 {
