@@ -78,23 +78,23 @@ void MostrarMenuSaludable()
         Console.Clear();
         switch (op)
         {
-            case 1: 
-                AgregarReceta("Saludable"); 
+            case 1:
+                AgregarReceta("Saludable");
                 break;
             case 2:
-                MostrarRecetas(); 
+                MostrarRecetas();
                 break;
             case 3:
-                BuscarPorIngrediente(); 
+                BuscarPorIngrediente();
                 break;
-            case 4: 
-                FiltrarPorTiempo(); 
+            case 4:
+                FiltrarPorTiempo();
                 break;
-            case 5: 
-                ModuloSeguimiento(); 
+            case 5:
+                ModuloSeguimiento();
                 break;
-            case 6: 
-                GuardarDatos(); 
+            case 6:
+                GuardarDatos();
                 break;
             case 7:
                 Console.WriteLine("\n  Cerrando sesión del Perfil Saludable...");
@@ -128,30 +128,30 @@ void MostrarMenuAprendizaje()
         Console.Clear();
         switch (op)
         {
-            case 1: 
-                AgregarReceta("Aprendizaje"); 
+            case 1:
+                AgregarReceta("Aprendizaje");
                 break;
             case 2:
-                MostrarRecetas(); 
+                MostrarRecetas();
                 break;
             case 3:
-                BuscarPorIngrediente(); 
+                BuscarPorIngrediente();
                 break;
             case 4:
-                FiltrarPorTiempo(); 
+                FiltrarPorTiempo();
                 break;
             case 5:
-                ModuloDidactico(); 
+                ModuloDidactico();
                 break;
             case 6:
-                GuardarDatos(); 
+                GuardarDatos();
                 break;
             case 7:
                 Console.WriteLine("\n  Cerrando sesión del Perfil de Aprendizaje...");
                 Thread.Sleep(1000);
                 break;
-            default: 
-                MostrarError("Opción no válida."); 
+            default:
+                MostrarError("Opción no válida.");
                 break;
         }
     } while (op != 7);
@@ -184,26 +184,26 @@ void AgregarReceta(string tipoPerfil)
     }
 
     if (tipoPerfil == "Saludable")
-{
-    Console.Write("  Ingredientes (Separados por coma): ");
-}
-else
-{
-    Console.Write("  Ingredientes (Qué necesitas comprar, separados por coma): ");
-}
+    {
+        Console.Write("  Ingredientes (Separados por coma): ");
+    }
+    else
+    {
+        Console.Write("  Ingredientes (Qué necesitas comprar, separados por coma): ");
+    }
 
-string ingredientes = Console.ReadLine()!;
+    string ingredientes = Console.ReadLine()!;
 
-if (tipoPerfil == "Saludable")
-{
-    Console.Write("  Pasos de preparación (Separados por ';'): ");
-}
-else
-{
-    Console.Write("  Pasos MUY DETALLADOS (Separados por ';'): ");
-}
+    if (tipoPerfil == "Saludable")
+    {
+        Console.Write("  Pasos de preparación (Separados por ';'): ");
+    }
+    else
+    {
+        Console.Write("  Pasos MUY DETALLADOS (Separados por ';'): ");
+    }
 
-string pasos = Console.ReadLine()!;
+    string pasos = Console.ReadLine()!;
 
     Console.Write("  Tiempo estimado de preparación (en minutos): ");
     if (!int.TryParse(Console.ReadLine(), out int tiempo) || tiempo <= 0)
@@ -396,7 +396,9 @@ void GuardarDatos()
     }
     catch (Exception ex)
     {
-        MostrarError("Hubo un problema al guardar: " + ex.Message);
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("Hubo un problema al guardar: " + ex.Message);
+        Console.ResetColor();
     }
 
     Pausar();
