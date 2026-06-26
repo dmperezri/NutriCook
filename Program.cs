@@ -78,15 +78,27 @@ void MostrarMenuSaludable()
         Console.Clear();
         switch (op)
         {
-            case 1: AgregarReceta("Saludable"); break;
-            case 2: MostrarRecetas(); break;
-            case 3: BuscarPorIngrediente(); break;
-            case 4: FiltrarPorTiempo(); break;
-            case 5: ModuloSeguimiento(); break;
-            case 6: GuardarDatos(); break;
+            case 1: 
+                AgregarReceta("Saludable"); 
+                break;
+            case 2:
+                MostrarRecetas(); 
+                break;
+            case 3:
+                BuscarPorIngrediente(); 
+                break;
+            case 4: 
+                FiltrarPorTiempo(); 
+                break;
+            case 5: 
+                ModuloSeguimiento(); 
+                break;
+            case 6: 
+                GuardarDatos(); 
+                break;
             case 7:
                 Console.WriteLine("\n  Cerrando sesión del Perfil Saludable...");
-                System.Threading.Thread.Sleep(1000);
+                Thread.Sleep(1000);
                 break;
             default:
                 MostrarError("Opción no válida.");
@@ -116,17 +128,31 @@ void MostrarMenuAprendizaje()
         Console.Clear();
         switch (op)
         {
-            case 1: AgregarReceta("Aprendizaje"); break;
-            case 2: MostrarRecetas(); break;
-            case 3: BuscarPorIngrediente(); break;
-            case 4: FiltrarPorTiempo(); break;
-            case 5: ModuloDidactico(); break;
-            case 6: GuardarDatos(); break;
+            case 1: 
+                AgregarReceta("Aprendizaje"); 
+                break;
+            case 2:
+                MostrarRecetas(); 
+                break;
+            case 3:
+                BuscarPorIngrediente(); 
+                break;
+            case 4:
+                FiltrarPorTiempo(); 
+                break;
+            case 5:
+                ModuloDidactico(); 
+                break;
+            case 6:
+                GuardarDatos(); 
+                break;
             case 7:
                 Console.WriteLine("\n  Cerrando sesión del Perfil de Aprendizaje...");
-                System.Threading.Thread.Sleep(1000);
+                Thread.Sleep(1000);
                 break;
-            default: MostrarError("Opción no válida."); break;
+            default: 
+                MostrarError("Opción no válida."); 
+                break;
         }
     } while (op != 7);
 }
@@ -134,7 +160,14 @@ void MostrarMenuAprendizaje()
 
 void AgregarReceta(string tipoPerfil)
 {
-    Banner(tipoPerfil == "Saludable" ? "NUEVA RECETA FIT" : "NUEVA RECETA PASO A PASO");
+    if (tipoPerfil == "Saludable")
+    {
+        Banner("NUEVA RECETA FIT");
+    }
+    else
+    {
+        Banner("NUEVA RECETA PASO A PASO");
+    }
 
     if (cantidad >= 50)
     {
@@ -150,13 +183,27 @@ void AgregarReceta(string tipoPerfil)
         return;
     }
 
-    Console.Write(tipoPerfil == "Saludable" ? "  Ingredientes (Separados por coma): "
-                                            : "  Ingredientes (Qué necesitas comprar, separados por coma): ");
-    string ingredientes = Console.ReadLine()!;
+    if (tipoPerfil == "Saludable")
+{
+    Console.Write("  Ingredientes (Separados por coma): ");
+}
+else
+{
+    Console.Write("  Ingredientes (Qué necesitas comprar, separados por coma): ");
+}
 
-    Console.Write(tipoPerfil == "Saludable" ? "  Pasos de preparación (Separados por ';'): "
-                                            : "  Pasos MUY DETALLADOS (Separados por ';'): ");
-    string pasos = Console.ReadLine()!;
+string ingredientes = Console.ReadLine()!;
+
+if (tipoPerfil == "Saludable")
+{
+    Console.Write("  Pasos de preparación (Separados por ';'): ");
+}
+else
+{
+    Console.Write("  Pasos MUY DETALLADOS (Separados por ';'): ");
+}
+
+string pasos = Console.ReadLine()!;
 
     Console.Write("  Tiempo estimado de preparación (en minutos): ");
     if (!int.TryParse(Console.ReadLine(), out int tiempo) || tiempo <= 0)
@@ -186,30 +233,30 @@ void MostrarRecetas()
     Banner("CATÁLOGO: " + perfilActual.ToUpper());
 
     bool hayRecetas = false;
-    int contadorVisual = 1;
+    int cantidadDeRecetas = 0;
 
     for (int i = 0; i < cantidad; i++)
     {
         if (recetas[i].categoria == perfilActual && !string.IsNullOrEmpty(recetas[i].nombre))
         {
             hayRecetas = true;
+            cantidadDeRecetas++;
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("  +-- #" + contadorVisual + " " + recetas[i].nombre +
+            Console.WriteLine("  +-- #" + cantidadDeRecetas + " " + recetas[i].nombre +
                 " [" + recetas[i].categoria + "] - " + recetas[i].tiempoPreparacion + " min");
             Console.ResetColor();
             Console.WriteLine("  |  Ingredientes : " + recetas[i].ingredientes);
             Console.WriteLine("  |  Pasos        :");
 
-            string[] pasosArray = recetas[i].pasos.Split(';');
-            for (int j = 0; j < pasosArray.Length; j++)
+            string[] pasos = recetas[i].pasos.Split(';');
+            for (int j = 0; j < pasos.Length; j++)
             {
-                if (!string.IsNullOrWhiteSpace(pasosArray[j]))
-                    Console.WriteLine("  |    " + (j + 1) + ". " + pasosArray[j].Trim());
+                if (!string.IsNullOrWhiteSpace(pasos[j]))
+                    Console.WriteLine("  |    " + (j + 1) + ". " + pasos[j].Trim());
             }
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("  +-------------------------------------------------\n");
             Console.ResetColor();
-            contadorVisual++;
         }
     }
 
@@ -313,35 +360,45 @@ void ModuloDidactico()
     Pausar();
 }
 
-
-
 void GuardarDatos()
 {
     try
     {
-        using (StreamWriter swSaludable = new StreamWriter(rutaSaludables, false))
-        using (StreamWriter swAprendizaje = new StreamWriter(rutaAprendizaje, false))
-        {
-            for (int i = 0; i < cantidad; i++)
-            {
-                if (string.IsNullOrEmpty(recetas[i].nombre)) continue;
+        StreamWriter archivoSaludable = new StreamWriter(rutaSaludables);
+        StreamWriter archivoAprendizaje = new StreamWriter(rutaAprendizaje);
 
-                string linea = recetas[i].nombre + ";" + recetas[i].ingredientes + ";" + recetas[i].pasos + ";" + recetas[i].tiempoPreparacion;
+        for (int i = 0; i < cantidad; i++)
+        {
+            if (!string.IsNullOrEmpty(recetas[i].nombre))
+            {
+                string linea = recetas[i].nombre +
+                    "; " + recetas[i].ingredientes +
+                    "; " + recetas[i].pasos +
+                    "; " + recetas[i].tiempoPreparacion;
 
                 if (recetas[i].categoria == "Saludable")
-                    swSaludable.WriteLine(linea);
+                {
+                    archivoSaludable.WriteLine(linea);
+                }
                 else if (recetas[i].categoria == "Aprendizaje")
-                    swAprendizaje.WriteLine(linea);
+                {
+                    archivoAprendizaje.WriteLine(linea);
+                }
             }
         }
+
+        archivoSaludable.Close();
+        archivoAprendizaje.Close();
+
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine("\n  ¡Registros guardados satisfactoriamente en archivos .txt!");
+        Console.WriteLine("\n  Registros guardados satisfactoriamente");
         Console.ResetColor();
     }
     catch (Exception ex)
     {
         MostrarError("Hubo un problema al guardar: " + ex.Message);
     }
+
     Pausar();
 }
 
@@ -360,23 +417,27 @@ void LeerArchivo(string ruta, string cat)
 {
     if (File.Exists(ruta))
     {
-        using (StreamReader sr = new StreamReader(ruta))
+        StreamReader archivo = new StreamReader(ruta);
+
+        string linea;
+
+        while ((linea = archivo.ReadLine()!) != null && cantidad < recetas.Length)
         {
-            string linea;
-            while ((linea = sr.ReadLine()!) != null && cantidad < recetas.Length)
+            string[] datos = linea.Split(';');
+
+            if (datos.Length >= 4)
             {
-                string[] datos = linea.Split(';');
-                if (datos.Length >= 4)
-                {
-                    recetas[cantidad].nombre = datos[0];
-                    recetas[cantidad].ingredientes = datos[1];
-                    recetas[cantidad].pasos = datos[2];
-                    int.TryParse(datos[3], out recetas[cantidad].tiempoPreparacion);
-                    recetas[cantidad].categoria = cat;
-                    cantidad++;
-                }
+                recetas[cantidad].nombre = datos[0];
+                recetas[cantidad].ingredientes = datos[1];
+                recetas[cantidad].pasos = datos[2];
+
+                int.TryParse(datos[3], out recetas[cantidad].tiempoPreparacion);
+
+                recetas[cantidad].categoria = cat;
+                cantidad++;
             }
         }
+        archivo.Close();
     }
 }
 
@@ -411,13 +472,13 @@ void Cargando()
     Console.Write("  Iniciando componentes del sistema");
     for (int i = 0; i < 6; i++)
     {
-        System.Threading.Thread.Sleep(250);
+        Thread.Sleep(250);
         Console.Write(".");
     }
     Console.ForegroundColor = ConsoleColor.Green;
     Console.WriteLine(" ¡Listo!\n");
     Console.ResetColor();
-    System.Threading.Thread.Sleep(300);
+    Thread.Sleep(300);
     Console.Clear();
 }
 
